@@ -6,6 +6,7 @@ import * as http from "http";
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var config = require('./routes/config');
 var users = require('./routes/edditeams');
 
 var app = express();
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/edditeams', index);
 app.use('/users', users);
+app.use('/config', config);
 
 /**
  * Get port from environment and store in Express.
