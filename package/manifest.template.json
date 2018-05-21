@@ -41,6 +41,17 @@
             ]
         }
     ],
+    "staticTabs": [
+        {
+            "entityId": "mytab",
+            "contentUrl": "https://{{HTTPS_URL}}",
+            "name": "EDDi",
+            "scopes": [
+                "team",
+                "personal"
+            ]
+        }
+    ],
     "permissions": [
         "identity",
         "messageTeamMembers"
