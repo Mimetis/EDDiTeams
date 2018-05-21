@@ -1,2 +1,29 @@
+<script>
+    // initialize teams
+    microsoftTeams.initialize();
+    // get context
+    microsoftTeams.getContext((context) => {
+        console.log('getContext');
+
+        this.setValidityState(true);
+    });
+
+    microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
+        // Calculate host dynamically to enable local debugging
+        let host = "https://" + window.location.host;
+        console.log(host);
+
+        microsoftTeams.settings.setSettings({
+            contentUrl: host + "/edditeams",
+            suggestedDisplayName: "EDDi",
+            removeUrl: host + "/remove",
+            entityId: "1"
+        });
+
+        saveEvent.notifySuccess();
+    });
+</script>
+
+
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>

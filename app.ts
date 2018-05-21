@@ -6,6 +6,7 @@ import * as http from "http";
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var users = require('./routes/edditeams');
 
 var app = express();
 
@@ -19,13 +20,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/edditeams', index);
 app.use('/users', users);
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3978');
 app.set('port', port);
 
 /**

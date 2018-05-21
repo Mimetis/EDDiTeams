@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+package/manifest.json
+package/manifest.zip
+
 # User-specific files
 *.suo
 *.user
