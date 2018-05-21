@@ -1,0 +1,53 @@
+{
+    "$schema": "https://statics.teams.microsoft.com/sdk/v1.1/manifest/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.1",
+    "version": "0.0.1",
+    "id": "dd4af790-d8ff-47a0-87ad-486318272c7b",
+    "packageName": "com.contoso.msteams.myapp",
+    "developer": {
+        "name": "MY NAME",
+        "websiteUrl": "https://{{HTTPS_URL}}",
+        "privacyUrl": "https://{{HTTPS_URL}}/privacy",
+        "termsOfUseUrl": "https://{{HTTPS_URL}}/termsofuse"
+    },
+    "icons": {
+        "color": "teamsng5_88.png",
+        "outline": "teamsng5_44.png"
+    },
+    "name": {
+        "short": "EDDi",
+        "full": "EDDi Microsoft Teams application"
+    },
+    "description": {
+        "short": "EDDi Microsoft Teams application",
+        "full": "EDDi Microsoft Teams application"
+    },
+    "accentColor": "#235EA5",
+    "bots": [
+        {
+            "botId": "0585cb69-16f0-46a7-9f9a-3520cac89b52",
+            "scopes": [
+                "personal",
+                "team"
+            ]
+        }
+    ],
+    "configurableTabs": [
+        {
+            "configurationUrl": "https://{{HTTPS_URL}}/config",
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team"
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "*.login.microsoftonline.com",
+        "{{HTTPS_URL}}",
+        "*.graph.microsoft.com"
+    ]
+}
