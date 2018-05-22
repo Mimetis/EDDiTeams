@@ -6,3 +6,17 @@
 
 <div>User name</div>
 <div>{{userName}}</div>
+
+<div>
+  <button (click)="getPhotoAsync()" class="button-primary">get my photo</button>
+</div>
+
+<div>
+  <img [src]="photoUrl" width="40" height="40">
+</div>
+
+
+
+<div>
+  <button (click)="getMembersAsync()" class="button-primary">get team members</button>
+</div>

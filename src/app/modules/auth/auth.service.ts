@@ -10,17 +10,7 @@ import { UtilsService } from './utils.service';
 })
 export class AuthService {
 
-  // How many digits the verification code should be
-  verificationCodeLength = 6;
-
-  // How long the verification code is valid
-  verificationCodeValidityInMilliseconds = 10 * 60 * 1000;       // 10 minutes
-
-  // Regexp to look for verification code in message
-  verificationCodeRegExp = /\b\d{6}\b/;
-
-
-  config = environment.v1Endpoint;
+  config = environment.v2Endpoint;
 
   constructor(private utils: UtilsService) { }
 
@@ -43,8 +33,6 @@ export class AuthService {
         if (err) {
           return rj(err);
         }
-        console.log('acquire token for graph');
-        console.log(token);
 
         rs(token);
 
@@ -74,8 +62,8 @@ export class AuthService {
       // launch popup
       microsoftTeams.authentication.authenticate({
         url: window.location.origin + "/auth",
-        width: 600,
-        height: 535,
+        width: 650,
+        height: 560,
 
         successCallback: (result) => {
           rs("successfully login in.");
@@ -97,41 +85,12 @@ export class AuthService {
       // Get the tab context, and use the information to navigate to Azure AD login page
       microsoftTeams.getContext((context) => {
 
-        // Try a silent auth before
-        // Parse query parameters
-        let queryParams = this.utils.getHashParameters();
-
-        let upn = queryParams["upn"];
-
-        // Setup extra query parameters for ADAL
-        // - openid and profile scope adds profile information to the id_token
-        // - login_hint provides the expected user name
-        if (context.upn) {
-          upn = context.upn;
-          this.config.extraQueryParameters += "&login_hint=" + encodeURIComponent(context.upn);
-        }
-
-        // Use a custom displayCall function to add extra query parameters to the url before navigating to it
-        this.config.displayCall = (urlNavigate) => {
-          if (urlNavigate) {
-            if (this.config.extraQueryParameters) {
-              urlNavigate += "&" + this.config.extraQueryParameters;
-            }
-            window.location.replace(urlNavigate);
-          }
-        }
-
         // @ts-ignore
         let authContext = new AuthenticationContext(this.config);
 
-        // See if there's a cached user and it matches the expected user
-        let user = authContext.getCachedUser();
-        if (user && upn) {
-          if (user.userName !== upn) {
-            // User doesn't match, clear the cache
-            authContext.clearCache();
-          }
-        }
+        let upn = this._addUpn(context);
+
+        this._ensureCachedUser(upn, authContext);
 
         authContext.login();
 
@@ -140,37 +99,49 @@ export class AuthService {
     });
   }
 
+  _ensureCachedUser(upn: any, authContext: any) {
+    // See if there's a cached user and it matches the expected user
+    let user = authContext.getCachedUser();
+
+    if (user && upn) {
+      if (user.userName !== upn) {
+        // User doesn't match, clear the cache
+        authContext.clearCache();
+      }
+    }
+  }
+  _addUpn(context: microsoftTeams.Context): string {
+    // Try a silent auth before
+    // Parse query parameters
+    let queryParams = this.utils.getHashParameters();
+
+    let upn = queryParams ? queryParams["upn"] : undefined;
+
+    // Setup extra query parameters for ADAL
+    // - openid and profile scope adds profile information to the id_token
+    // - login_hint provides the expected user name
+    if (context.upn) {
+      upn = context.upn;
+      this.config.extraQueryParameters += "&login_hint=" + encodeURIComponent(context.upn);
+    }
+
+    console.log("UPN is: " + upn);
+
+    return upn;
+  }
+
   async loginSilentelyAsync(): Promise<boolean> {
     return new Promise<boolean>((rs, rj) => {
 
       // Get the tab context, and use the information to navigate to Azure AD login page
       microsoftTeams.getContext((context) => {
 
-        // Try a silent auth before
-        // Parse query parameters
-        let queryParams = this.utils.getHashParameters();
-
-        let upn = queryParams["upn"];
-
-        // Setup extra query parameters for ADAL
-        // - openid and profile scope adds profile information to the id_token
-        // - login_hint provides the expected user name
-        if (context.upn) {
-          upn = context.upn;
-          this.config.extraQueryParameters += "&login_hint=" + encodeURIComponent(context.upn);
-        }
-
         // @ts-ignore
         let authContext = new AuthenticationContext(this.config);
 
-        // See if there's a cached user and it matches the expected user
-        let user = authContext.getCachedUser();
-        if (user && upn) {
-          if (user.userName !== upn) {
-            // User doesn't match, clear the cache
-            authContext.clearCache();
-          }
-        }
+        let upn = this._addUpn(context);
+
+        this._ensureCachedUser(upn, authContext);
 
         // Get the id token (which is the access token for resource = clientId)
         let token = authContext.getCachedToken(this.config.clientId);
@@ -193,15 +164,44 @@ export class AuthService {
   }
 
 
+  async promptLogoutAsync() {
+    return new Promise<any>((rs, rj) => {
 
-  async logoutAsync(): Promise<any> {
+      // launch popup
+      microsoftTeams.authentication.authenticate({
+        url: window.location.origin + "/authlogout",
+        width: 650,
+        height: 560,
+
+        successCallback: (result) => {
+          rs("successfully log out.");
+        },
+
+        failureCallback: (reason) => {
+          if (reason === "CancelledByUser" || reason === "FailedToOpenWindow") {
+            return rj("Login was blocked by popup blocker or canceled by user.");
+          }
+          return rj(reason);
+        }
+      })
+    });
+  }
+
+  async _logoutAsync(): Promise<any> {
 
     return new Promise<any>((rs, rj) => {
 
-      // @ts-ignore
-      let authContext = new AuthenticationContext(this.config);
+      try {
+        // @ts-ignore
+        let authContext = new AuthenticationContext(this.config);
 
-      authContext.logOut();
+        authContext.logOut();
+
+        rs(true);
+      } catch (error) {
+        rj(error);
+      }
+
 
     });
   }
@@ -229,40 +229,5 @@ export class AuthService {
     });
   }
 
-  // Get the user's profile information from Microsoft Graph
-  getUserProfile(accessToken) {
-    // $.ajax({
-    //   url: "https://graph.microsoft.com/v1.0/me/",
-    //   beforeSend: function (request) {
-    //     request.setRequestHeader("Authorization", "Bearer " + accessToken);
-    //   },
-    //   success: function (profile) {
-    //     $("#profileDisplayName").text(profile.displayName);
-    //     $("#profileJobTitle").text(profile.jobTitle);
-    //     $("#profileMail").text(profile.mail);
-    //     $("#profileUpn").text(profile.userPrincipalName);
-    //     $("#profileObjectId").text(profile.id);
-    //     $("#divProfile").css({ display: "" });
-    //     $("#divError").css({ display: "none" });
-    //   },
-    //   error: function (xhr, textStatus, errorThrown) {
-    //     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-    //     $("#divError").text(errorThrown).css({ display: "" });
-    //     $("#divProfile").css({ display: "none" });
-    //   },
-    // });
-  }
-
-  // Show error information
-  handleAuthError(reason) {
-    // $("#divError").text(reason).css({ display: "" });
-    // $("#divProfile").css({ display: "none" });
-  }
-
-  // Clear all information in tab
-  hideProfileAndError() {
-    // $("#divError").text("").css({ display: "none" });
-    // $("#divProfile").css({ display: "none" });
-  }
 
 }
