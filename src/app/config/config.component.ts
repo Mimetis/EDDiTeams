@@ -10,8 +10,6 @@ export class ConfigComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('ngOnInit  on ConfigComponent');
-
     // initialize teams
     microsoftTeams.initialize();
     // get context
@@ -26,7 +24,7 @@ export class ConfigComponent implements OnInit {
 
       microsoftTeams.settings.setSettings({
         contentUrl: host + "/",
-        suggestedDisplayName: "NgTab",
+        suggestedDisplayName: "EDDi Teams",
         removeUrl: host + "/remove",
         entityId: "1"
       });
