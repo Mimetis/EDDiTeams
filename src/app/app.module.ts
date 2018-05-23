@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GraphService } from './services/graph.service';
 import { HomeComponent } from './home/home.component';
 import { AuthModule } from './modules/auth/auth.module';
+import { FabricModule } from "./modules/fabric/fabric.module";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AuthModule } from './modules/auth/auth.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AuthModule
+    AuthModule,
+    FabricModule
   ],
   providers: [GraphService],
   bootstrap: [AppComponent]

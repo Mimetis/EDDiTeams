@@ -1,6 +1,6 @@
 <div>
-  <button (click)="authenticateAsync()" class="button-primary">Authentication</button>
-  <button (click)="logoutAsync()" class="button-primary">logout</button>
+  <fab-button (click)="authenticateAsync()" class="ms-Button ms-Button--primary button-margin" buttonlabel="Authentication"></fab-button>
+  <fab-button (click)="logoutAsync()" class="ms-Button ms-Button--primary" buttonlabel="logout"></fab-button>
 </div>
 
 
@@ -8,7 +8,7 @@
 <div>{{userName}}</div>
 
 <div>
-  <button (click)="getPhotoAsync()" class="button-primary">get my photo</button>
+  <fab-button (click)="getPhotoAsync()" class="ms-Button ms-Button--primary button-margin" buttonlabel="get my photo"></fab-button>
 </div>
 
 <div>
@@ -18,5 +18,25 @@
 
 
 <div>
-  <button (click)="getMembersAsync()" class="button-primary">get team members</button>
+  <fab-button (click)="getMembersAsync()" class="ms-Button" buttonlabel="get team members"></fab-button>
 </div>
+
+<fab-label text="Hello label" isRequired="true" isDisabled="true"></fab-label>
+
+<fab-dropdown [items]="items" [isDisabled]="ddlIsDisabled" (selectedItemChanged)="onOptionSelected($event)" class="ms-dropdown"></fab-dropdown>
+
+<fab-button (click)="addDropdownItems()" class="ms-Button ms-Button--primary button-margin" buttonlabel="Add items to dropdown list"></fab-button>
+
+<fab-button (click)="disableDropdown()" class="ms-Button ms-Button--primary button-margin" buttonlabel="disable or enable"></fab-button>
+
+<div>{{selectedOption}}</div>
+
+<fab-link text="Go to this link" href="http://www.google.fr"></fab-link>
+
+
+<fab-table isSelectable="true" [isMultiSelection]="tableIsMultiSelection" [selectedItems]="tableSelectedItems" (selectedItemsChanged)="onTableSelected($event)"
+  [headers]="itemsHeaders" [items]="items"></fab-table>
+
+<fab-button (click)="tableChangeMultiSelect()" class="ms-Button ms-Button--primary button-margin" buttonlabel="disable or enable multi selection"></fab-button>
+
+<fab-button (click)="tableChangeItems()" class="ms-Button ms-Button--primary button-margin" buttonlabel="change table items"></fab-button>

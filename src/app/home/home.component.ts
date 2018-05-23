@@ -18,12 +18,64 @@ export class HomeComponent implements OnInit {
 
   userName: string;
   photoUrl: SafeUrl;
+  tableSelectedItems = [];
+  tableIsMultiSelection = false;
+
+  items = [
+    { key: "1", value: "Option 1", isSelected: false },
+    { key: "2", value: "Option 2", isSelected: false },
+    { key: "3", value: "Option 3", isSelected: true },
+    { key: "4", value: "Option 4", isSelected: false },
+    { key: "5", value: "Option 5", isSelected: false },
+  ];
+
+  itemsHeaders = ["ID", "Option", "Selected ?"]
+
+  ddlIsDisabled = false;
+
+  onOptionSelected(itemSelected) {
+    console.log(itemSelected);
+  }
+
+  onTableSelected(itemsSelected) {
+    console.log(itemsSelected);
+  }
+
+  tableChangeMultiSelect() {
+    this.tableIsMultiSelection = !this.tableIsMultiSelection;
+  }
+  tableChangeItems() {
+    this.items = [
+      { key: "4", value: "NEW Option 4", isSelected: true },
+      { key: "6", value: "NEW Option 6", isSelected: false },
+      { key: "7", value: "NEW Option 7", isSelected: false }];
+
+    this.tableSelectedItems = [this.items[1]];
+
+  }
+  disableDropdown() {
+    this.ddlIsDisabled = !this.ddlIsDisabled;
+  }
+
+
+  addDropdownItems() {
+    this.items = [
+      { key: "1", value: "Option 1", isSelected: false },
+      { key: "2", value: "Option 2", isSelected: false },
+      { key: "3", value: "Option 3", isSelected: false },
+      { key: "4", value: "Option 4", isSelected: true },
+      { key: "5", value: "Option 5", isSelected: false },
+      { key: "6", value: "NEW Option 1", isSelected: false },
+      { key: "7", value: "NEW Option 2", isSelected: false }
+    ];
+  }
 
   async ngOnInit() {
     try {
 
       microsoftTeams.initialize();
 
+      this.tableSelectedItems = this.items.filter(i => parseInt(i.key) < 3);
       // authenticate the user
       await this.getMeAsync();
 

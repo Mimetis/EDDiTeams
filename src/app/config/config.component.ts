@@ -14,7 +14,7 @@ export class ConfigComponent implements OnInit {
     microsoftTeams.initialize();
     // get context
     microsoftTeams.getContext((context: microsoftTeams.Context) => {
-      console.log('getContext');
+      console.log(context);
       this.setValidityState(true);
     });
 
@@ -26,7 +26,7 @@ export class ConfigComponent implements OnInit {
         contentUrl: host + "/",
         suggestedDisplayName: "EDDi Teams",
         removeUrl: host + "/remove",
-        entityId: "1"
+        entityId: Math.random().toString()
       });
 
       saveEvent.notifySuccess();
