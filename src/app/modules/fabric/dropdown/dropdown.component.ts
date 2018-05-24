@@ -5,7 +5,6 @@ import { FabricModule } from '../fabric.module';
 interface DropDownItem {
   key: string;
   value: string;
-  isSelected: boolean;
   isDisabled: boolean;
 }
 
@@ -34,7 +33,9 @@ export class DropdownComponent {
 
   @Input() items: Array<DropDownItem>;
   @Input() isDisabled: boolean = false;
-  @Output() selectedItemChanged: EventEmitter<DropDownItem> = new EventEmitter<DropDownItem>();
+
+  @Input() selectedItem: DropDownItem
+  @Output() selectedItemChange: EventEmitter<DropDownItem> = new EventEmitter<DropDownItem>();
 
 
   private _container: HTMLElement;
@@ -72,13 +73,9 @@ export class DropdownComponent {
       this._container.classList.add('is-disabled');
     }
 
-    // create a new dropdown based on UL / LI
-    this._newUList = document.createElement("ul");
-    this._newUList.classList.add(DROPDOWN_ITEMS_CLASS);
 
     /** Add the new replacement dropdown */
     this._container.appendChild(this._newDropdownLabel);
-    this._container.appendChild(this._newUList);
 
     /** Add dropdown label helper for truncation */
     this._container.appendChild(this._dropdownLabelHelper);
@@ -97,9 +94,12 @@ export class DropdownComponent {
     for (let propName in changes) {
       let changedProp = changes[propName];
 
-      if (propName.toLocaleLowerCase() === "items" && !changedProp.isFirstChange()) {
+      if (changedProp.isFirstChange())
+        continue;
+
+      if (propName.toLowerCase() === "items" || propName.toLowerCase() == "selecteditem") {
         this.bind();
-      } else if (propName.toLocaleLowerCase() === "isdisabled" && !changedProp.isFirstChange()) {
+      } else if (propName.toLocaleLowerCase() === "isdisabled") {
         if (this.isDisabled) {
           this._container.classList.add('is-disabled');
         } else {
@@ -113,11 +113,15 @@ export class DropdownComponent {
   /** Call a bind on the list. will clean the list and then fill it again with the options values */
   bind() {
 
-    if (this._newUList.children && this._newUList.children.length > 0) {
-      for (let i = this._newUList.children.length - 1; i >= 0; i--) {
-        this._newUList.removeChild(this._newUList.children[i]);
-      }
+    if (this._newUList) {
+      this._container.removeChild(this._newUList);
     }
+
+    // create a new dropdown based on UL / LI
+    this._newUList = document.createElement("ul");
+    this._newUList.classList.add(DROPDOWN_ITEMS_CLASS);
+    this._container.appendChild(this._newUList);
+
 
     if (!this.items || this.items.length <= 0)
       return;
@@ -128,7 +132,7 @@ export class DropdownComponent {
       let ddlItem = this.items[i];
 
       // if the value is selected, set the title correctly
-      if (ddlItem.isSelected) {
+      if (this.selectedItem && this.selectedItem === ddlItem) {
         this._newDropdownLabel.innerHTML = ddlItem.value;
       }
 
@@ -141,7 +145,7 @@ export class DropdownComponent {
         liItem.classList.add("is-disabled");
       }
 
-      if (ddlItem.isSelected) {
+      if (this.selectedItem && this.selectedItem === ddlItem) {
         liItem.classList.add(IS_SELECTED_CLASS);
         foundOneSelected = true;
       }
@@ -154,12 +158,6 @@ export class DropdownComponent {
       liItem.addEventListener("click", this._onItemSelection);
     }
 
-    // // select the first one
-    // if (!foundOneSelected && this._newUList.children.length > 0) {
-    //   let option = this.items[0];
-    //   this._newDropdownLabel.innerHTML = option.value;
-    //   this._newUList[0].classList.add(IS_SELECTED_CLASS);
-    // }
   }
 
 
@@ -211,10 +209,9 @@ export class DropdownComponent {
 
         if (currentLiItem.id === liItemSelected.id) {
           currentLiItem.classList.add(IS_SELECTED_CLASS);
-          this.items[i].isSelected = true;
+          this.selectedItem = this.items[i];
         } else {
           currentLiItem.classList.remove(IS_SELECTED_CLASS);
-          this.items[i].isSelected = false
         }
 
       }
@@ -223,7 +220,7 @@ export class DropdownComponent {
       this._newDropdownLabel.innerHTML = dropDownItemSelected.value;
 
       /** Trigger any change event tied to the original dropdown. */
-      this.selectedItemChanged.emit(dropDownItemSelected);
+      this.selectedItemChange.emit(dropDownItemSelected);
 
     }
   }

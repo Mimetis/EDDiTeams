@@ -23,19 +23,21 @@
 
 <fab-label text="Hello label" isRequired="true" isDisabled="true"></fab-label>
 
-<fab-dropdown [items]="items" [isDisabled]="ddlIsDisabled" (selectedItemChanged)="onOptionSelected($event)" class="ms-dropdown"></fab-dropdown>
+<fab-dropdown [items]="selectedItems" [isDisabled]="ddlIsDisabled" [(selectedItem)]="selectedItem" class="ms-dropdown"></fab-dropdown>
 
 <fab-button (click)="addDropdownItems()" class="ms-Button ms-Button--primary button-margin" buttonlabel="Add items to dropdown list"></fab-button>
 
 <fab-button (click)="disableDropdown()" class="ms-Button ms-Button--primary button-margin" buttonlabel="disable or enable"></fab-button>
 
-<div>{{selectedOption}}</div>
+<fab-button (click)="selectedItem = selectedItems[selectedItems.length - 1]" class="ms-Button ms-Button--primary button-margin"
+  buttonlabel="disable or enable"></fab-button>
+
+<div>{{selectedItem ? selectedItem.value : ""}}</div>
 
 <fab-link text="Go to this link" href="http://www.google.fr"></fab-link>
 
-
-<fab-table isSelectable="true" [isMultiSelection]="tableIsMultiSelection" [selectedItems]="tableSelectedItems" (selectedItemsChanged)="onTableSelected($event)"
-  [headers]="itemsHeaders" [items]="items"></fab-table>
+<fab-table isSelectable="true" [isMultiSelection]="tableIsMultiSelection" [(selectedItems)]="selectedItems" [headers]="itemsHeaders"
+  [items]="items"></fab-table>
 
 <fab-button (click)="tableChangeMultiSelect()" class="ms-Button ms-Button--primary button-margin" buttonlabel="disable or enable multi selection"></fab-button>
 

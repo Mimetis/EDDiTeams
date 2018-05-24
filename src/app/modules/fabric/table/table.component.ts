@@ -16,8 +16,6 @@ export class TableComponent {
   // items in the table
   @Input() items: Array<any>;
 
-  // selected item
-  @Input() selectedItems: Array<any> = [];
 
   // optional headers, replacing the item properties name as column header
   @Input() headers: Array<string>;
@@ -28,8 +26,11 @@ export class TableComponent {
   // set if we can select multiple lines. It's not used if isSelectable is false
   @Input() isMultiSelection: boolean = true;
 
+
+  // selected items, implementing two way binding
+  @Input() selectedItems: Array<any> = [];
   // raised when an item is selected
-  @Output() selectedItemsChanged: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
+  @Output() selectedItemsChange: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
 
   private _innerTable: HTMLTableElement;
 
@@ -217,7 +218,7 @@ export class TableComponent {
 
       }
     }
-    this.selectedItemsChanged.emit(this.selectedItems);
+    this.selectedItemsChange.emit(this.selectedItems);
   }
 
   // Should implement logic if we change isSelectable, selectedItem, isMultSelection and so on...
