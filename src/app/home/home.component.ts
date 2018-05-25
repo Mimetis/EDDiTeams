@@ -16,29 +16,39 @@ export class HomeComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) { }
 
+  isCheckedDisabled: boolean = false;
   tableIsMultiSelection = true;
-
+  isChecked = true;
   userName: string;
   photoUrl: SafeUrl;
   selectedItems = [];
   selectedItem = undefined;
   items = [
-    { key: "1", value: "Option 1", isSelected: false },
-    { key: "2", value: "Option 2", isSelected: false },
-    { key: "3", value: "Option 3", isSelected: true },
-    { key: "4", value: "Option 4", isSelected: false },
-    { key: "5", value: "Option 5", isSelected: false },
-    { key: "6", value: "Option 6", isSelected: false },
-    { key: "7", value: "Option 7", isSelected: false },
-    { key: "8", value: "Option 8", isSelected: false },
-    { key: "9", value: "Option 9", isSelected: false },
-    { key: "10", value: "Option 10", isSelected: false },
+    { key: "1", value: "Option 1", isDisabled: false },
+    { key: "2", value: "Option 2", isDisabled: false },
+    { key: "3", value: "Option 3", isDisabled: true },
+    { key: "4", value: "Option 4", isDisabled: false },
+    { key: "5", value: "Option 5", isDisabled: false },
+    { key: "6", value: "Option 6", isDisabled: false },
+    { key: "7", value: "Option 7", isDisabled: false },
+    { key: "8", value: "Option 8", isDisabled: false },
+    { key: "9", value: "Option 9", isDisabled: false },
+    { key: "10", value: "Option 10", isDisabled: false },
   ];
 
   itemsHeaders = ["ID", "Option", "Selected ?"]
 
   ddlIsDisabled = false;
 
+  checkName = "check this";
+  setChecked() {
+    this.isChecked = !this.isChecked;
+    this.checkName = 'changing name too';
+    this.isCheckedDisabled = !this.isCheckedDisabled;
+  }
+  getChecked() {
+    console.log(this.isChecked);
+  }
   onOptionSelected(itemSelected) {
     console.log(itemSelected);
   }

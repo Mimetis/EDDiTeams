@@ -1,0 +1,76 @@
+<p>
+  table works!
+</p>
+
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">
+      {{sample01}}
+    </code>
+  </div>
+
+  <fab-table [items]="items"></fab-table>
+</div>
+
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">
+        {{sample02}}
+      </code>
+  </div>
+
+  <fab-table [items]="items" [isSelectable]="true" [isMultiSelection]="false"></fab-table>
+</div>
+
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">
+          {{sample03}}
+        </code>
+  </div>
+
+  <fab-table [items]="items" isSelectable="true" isMultiSelection="true"></fab-table>
+</div>
+
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">
+            {{sample04}}
+          </code>
+  </div>
+
+  <fab-table [isSelectable]="true" [isMultiSelection]="true" [(selectedItems)]="selectedItems" [headers]="itemsHeaders" [items]="items"></fab-table>
+</div>
+
+
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">
+              {{sample05}}
+            </code>
+  </div>
+
+  <div class="mark">
+    <code class="prettyprint">
+    <![CDATA[
+      function selectItems() {
+        this.items2 = [
+          { key: "1", value: "Option 101", isDisabled: false },
+          { key: "2", value: "Option 102", isDisabled: false },
+          { key: "3", value: "Option 103", isDisabled: true },
+        ];
+      }
+      ]]>
+    </code>
+  </div>
+
+  <div>
+    <fab-button (click)="selectItems()" classType="ms-Button--primary" value="Set Items"></fab-button>
+  </div>
+
+  <div style="margin-top: 10px;">
+    <fab-table [headers]="itemsHeaders" [items]="items2"></fab-table>
+  </div>
+
+
+</div>

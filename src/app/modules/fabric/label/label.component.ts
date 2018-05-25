@@ -40,7 +40,6 @@ export class LabelComponent {
     if (!this.componentElement)
       return;
 
-    console.log("on changes");
 
     for (let propName in changes) {
       let changedProp = changes[propName];

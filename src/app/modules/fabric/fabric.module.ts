@@ -5,6 +5,9 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { LabelComponent } from './label/label.component';
 import { LinkComponent } from './link/link.component';
 import { TableComponent } from './table/table.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
+import { RadiobuttonComponent } from './radiobutton/radiobutton.component';
+import { ChoiceFieldGroupComponent } from './choicefieldgroup/choicefieldgroup.component';
 
 @NgModule({
   imports: [
@@ -12,9 +15,9 @@ import { TableComponent } from './table/table.component';
   ],
   declarations: [
     ButtonComponent, DropdownComponent, LabelComponent, LinkComponent,
-    TableComponent],
+    TableComponent, CheckboxComponent, RadiobuttonComponent, ChoiceFieldGroupComponent],
   exports: [
     ButtonComponent, DropdownComponent, LabelComponent, LinkComponent,
-    TableComponent]
+    TableComponent, CheckboxComponent, RadiobuttonComponent, ChoiceFieldGroupComponent]
 })
 export class FabricModule { }

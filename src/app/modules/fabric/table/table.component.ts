@@ -44,57 +44,63 @@ export class TableComponent {
       this._innerTable.addEventListener("click", this._toggleRowSelection.bind(this), false);
     }
 
-    this.bind();
+    this._bind();
   }
 
   /** Call a bind on the list. will clean the list and then fill it again with the options values */
-  bind() {
-
-    if (!this.items || this.items.length <= 0)
-      return;
+  private _bind() {
 
     this._body = this._innerTable.createTBody();
 
-    // get the item's properties
-    let itemProperties = Object.getOwnPropertyNames(this.items[0]);
 
+    // Contains headers string
+    let itemProperties: Array<string> = [];
 
-    for (let i = 0; i < this.items.length; i++) {
+    if (this.items) {
 
-      // Insert a row in the table within the correct index
-      var newRow = this._body.insertRow(i);
+      // get the item's properties
+      if (this.items.length > 0)
+        itemProperties = Object.getOwnPropertyNames(this.items[0]);
 
-      // get the item
-      var item = this.items[i];
+      for (let i = 0; i < this.items.length; i++) {
 
-      // for each property, set a new cell with the correct value
-      for (let propIndex = 0; propIndex < itemProperties.length; propIndex++) {
+        // Insert a row in the table within the correct index
+        var newRow = this._body.insertRow(i);
 
-        // get the property name
-        let itemPropertyName = itemProperties[propIndex];
+        // get the item
+        var item = this.items[i];
 
-        // get the item property value
-        let itemPropertyValue = item[itemPropertyName].toString();
+        // for each property, set a new cell with the correct value
+        for (let propIndex = 0; propIndex < itemProperties.length; propIndex++) {
 
-        // create a new cell
-        var newCell = newRow.insertCell(propIndex);
+          // get the property name
+          let itemPropertyName = itemProperties[propIndex];
 
-        // create and append a new text node
-        var newText = document.createTextNode(itemPropertyValue);
-        newCell.appendChild(newText);
+          // get the item property value
+          let itemPropertyValue = item[itemPropertyName].toString();
+
+          console.log(itemPropertyName + " - " + itemPropertyValue);
+          // create a new cell
+          var newCell = newRow.insertCell(propIndex);
+
+          // create and append a new text node
+          var newText = document.createTextNode(itemPropertyValue);
+          newCell.appendChild(newText);
+
+        }
+
+        // set the selected state if the row is selected by default
+        if (this.selectedItems && this.selectedItems.length > 0 && this.selectedItems.includes(item) && this.isSelectable) {
+          newRow.className = TABLE_ITEM_IS_SELECTED_CLASS;
+        }
+
+        // if it's selectable, so add the checkbox on the left side
+        if (this.isSelectable) {
+          var newCell = newRow.insertCell(0);
+          newCell.classList.add('ms-Table-rowCheck');
+        }
       }
 
-      // set the selected state if the row is selected by default
-      if (this.selectedItems.length > 0 && this.selectedItems.includes(item) && this.isSelectable) {
-        newRow.className = TABLE_ITEM_IS_SELECTED_CLASS;
-      }
-
-
-      // if it's selectable, so add the checkbox on the left side
-      if (this.isSelectable) {
-        var newCell = newRow.insertCell(0);
-        newCell.classList.add('ms-Table-rowCheck');
-      }
     }
 
     // Create an empty <thead> element and add it to the table:
@@ -110,6 +116,8 @@ export class TableComponent {
       // add the checkbox if multi select is available
       if (this.isMultiSelection)
         headerCell.classList.add('ms-Table-rowCheck');
+      else
+        headerCell.classList.remove('ms-Table-rowCheck');
 
       headerRow.appendChild(headerCell);
     }
@@ -133,8 +141,8 @@ export class TableComponent {
       // add it the the header row
       headerRow.appendChild(headerCell);
     }
-
   }
+
 
 
   /**
@@ -146,7 +154,6 @@ export class TableComponent {
     let selectedRow = (<HTMLElement>event.target).parentElement;
 
     let isMultSelectionAndHeadersRowsIsClicked = 0;
-
 
     // we try to select the header row
     if (selectedRow.parentElement.tagName.toLowerCase() == "thead" && this.isMultiSelection) {
@@ -228,9 +235,13 @@ export class TableComponent {
       let changedProp = changes[propName];
 
       if (!changedProp.isFirstChange()) {
-        this._innerTable.removeChild(this._header);
-        this._innerTable.removeChild(this._body);
-        this.bind();
+        if (this._innerTable && this._header)
+          this._innerTable.removeChild(this._header);
+
+        if (this._innerTable && this._body)
+          this._innerTable.removeChild(this._body);
+
+        this._bind();
 
       }
     }

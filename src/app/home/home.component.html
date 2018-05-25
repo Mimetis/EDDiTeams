@@ -1,36 +1,42 @@
 <div>
-  <fab-button (click)="authenticateAsync()" class="ms-Button ms-Button--primary button-margin" buttonlabel="Authentication"></fab-button>
-  <fab-button (click)="logoutAsync()" class="ms-Button ms-Button--primary" buttonlabel="logout"></fab-button>
+  <fab-button (click)="authenticateAsync()" classType="ms-Button--primary" class="button-margin" value="Authentication"></fab-button>
+  <fab-button (click)="logoutAsync()" classType="ms-Button--primary" value="logout"></fab-button>
 </div>
-
 
 <div>User name</div>
 <div>{{userName}}</div>
 
 <div>
-  <fab-button (click)="getPhotoAsync()" class="ms-Button ms-Button--primary button-margin" buttonlabel="get my photo"></fab-button>
+  <fab-button (click)="getPhotoAsync()" classType="ms-Button--primary" class="button-margin" value="get my photo"></fab-button>
 </div>
 
 <div>
   <img [src]="photoUrl" width="40" height="40">
 </div>
 
+<fab-choicefieldgroup [items]="selectedItems" value="Make a CHOICE"></fab-choicefieldgroup>
 
+
+<fab-button (click)="setChecked()" value="change checked status"></fab-button>
+
+<fab-radiobutton [value]="checkName" [isDisabled]="isCheckedDisabled"></fab-radiobutton>
+
+<fab-checkbox [value]="checkName" [isDisabled]="isCheckedDisabled" [(isChecked)]="isChecked" (isCheckedChange)="getChecked()"></fab-checkbox>
 
 <div>
-  <fab-button (click)="getMembersAsync()" class="ms-Button" buttonlabel="get team members"></fab-button>
+  <fab-button (click)="getMembersAsync()" value="get team members"></fab-button>
 </div>
 
-<fab-label text="Hello label" isRequired="true" isDisabled="true"></fab-label>
+<fab-label text="Hello label"></fab-label>
 
 <fab-dropdown [items]="selectedItems" [isDisabled]="ddlIsDisabled" [(selectedItem)]="selectedItem" class="ms-dropdown"></fab-dropdown>
 
-<fab-button (click)="addDropdownItems()" class="ms-Button ms-Button--primary button-margin" buttonlabel="Add items to dropdown list"></fab-button>
+<fab-button (click)="addDropdownItems()" classType="ms-Button--primary" class="button-margin" value="Add items to dropdown list"></fab-button>
 
-<fab-button (click)="disableDropdown()" class="ms-Button ms-Button--primary button-margin" buttonlabel="disable or enable"></fab-button>
+<fab-button (click)="disableDropdown()" classType="ms-Button--primary" class="button-margin" value="disable or enable"></fab-button>
 
-<fab-button (click)="selectedItem = selectedItems[selectedItems.length - 1]" class="ms-Button ms-Button--primary button-margin"
-  buttonlabel="disable or enable"></fab-button>
+<fab-button (click)="selectedItem = selectedItems[selectedItems.length - 1]" classType="ms-Button--primary" class="button-margin"
+  value="disable or enable"></fab-button>
 
 <div>{{selectedItem ? selectedItem.value : ""}}</div>
 
@@ -39,6 +45,6 @@
 <fab-table isSelectable="true" [isMultiSelection]="tableIsMultiSelection" [(selectedItems)]="selectedItems" [headers]="itemsHeaders"
   [items]="items"></fab-table>
 
-<fab-button (click)="tableChangeMultiSelect()" class="ms-Button ms-Button--primary button-margin" buttonlabel="disable or enable multi selection"></fab-button>
+<fab-button (click)="tableChangeMultiSelect()" class="ms-Button ms-Button--primary button-margin" value="disable or enable multi selection"></fab-button>
 
-<fab-button (click)="tableChangeItems()" class="ms-Button ms-Button--primary button-margin" buttonlabel="change table items"></fab-button>
+<fab-button (click)="tableChangeItems()" class="ms-Button ms-Button--primary button-margin" value="change table items"></fab-button>

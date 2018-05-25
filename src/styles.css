@@ -1,1 +1,207 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    font-size: .875rem;
+  }
+  
+  .mark{
+    border:1px solid #005cb9;
+    background-color:#f1f5f9;
+    overflow:auto;
+    margin-top:1.7em;
+    margin-bottom:1.7em;
+    padding:1em!important;
+    overflow-y:hidden
+  }
+
+  /*
+   * Sidebar
+   */
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 60px 0 0; /* Height of navbar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  }
+  
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 60px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  }
+  
+  @supports ((position: -webkit-sticky) or (position: sticky)) {
+    .sidebar-sticky {
+      position: -webkit-sticky;
+      position: sticky;
+    }
+  }
+  
+  .sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #999;
+  }
+  
+  .sidebar .nav-link.active {
+    color: #007bff;
+  }
+  
+  .sidebar .nav-link:hover .feather,
+  .sidebar .nav-link.active .feather {
+    color: inherit;
+  }
+  
+  .sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+  }
+  
+  /*
+   * Content
+   */
+  
+  [role="main"] {
+    padding-top: 60px; /* Space for fixed navbar */
+  }
+  
+  /*
+   * Navbar
+   */
+  
+  .navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, .25);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+  }
+  
+  .navbar .form-control {
+    padding: .75rem 1rem;
+    border-width: 0;
+    border-radius: 0;
+  }
+  
+  .form-control-dark {
+    color: #fff;
+    background-color: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .1);
+  }
+  
+  .form-control-dark:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+  }
+  
+  /*
+   * Utilities
+   */
+  
+  .border-top { border-top: 1px solid #e5e5e5; }
+  .border-bottom { border-bottom: 1px solid #e5e5e5; }
+  
+
+p,
+ul,
+ol {
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+ol {
+  list-style-position: inside;
+  list-style-type: decimal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+.divstep{
+    max-width: 90em;
+    padding-left: 56px;
+    border-bottom: 1px solid #c8c8c8;
+    margin-bottom: 48px;
+    padding-bottom: 20px;
+
+}
+
+.steps {
+    counter-reset: li;
+    max-width: 90em;
+  }
+  
+  [dir='ltr'] .steps {
+    margin-right: 0;
+  }
+  
+  [dir='rtl'] .steps {
+    margin-left: 0;
+  }
+  
+  .steps li  {
+    list-style: none;
+    position: relative;
+    padding-top: 0px;
+    padding-left: 56px;
+    border-bottom: 1px solid #c8c8c8;
+    margin-bottom: 48px;
+    padding-bottom: 20px;
+  }
+  
+ 
+  
+  .steps li::before {
+    color: #721481;
+    content: counter(li);
+    counter-increment: li;
+    font-size: 48px;
+    font-weight: 100;
+    line-height: 38px;
+    position: absolute;
+    padding-left: 0px;
+    margin-left: -50px;
+    top: 0;
+  }
+  
+  .steps code {
+    margin: 16px 0;
+  }
+  
+
+
+
+  @media screen and (min-width: 640px) {
+    .steps li{
+      padding-top: 0;
+    }
+  
+    [dir='ltr'] .steps li {
+      padding-left: 56px;
+    }
+  
+    [dir='rtl'] .steps li {
+      padding-right: 56px;
+    }
+  
+    [dir='ltr'] .steps li::before{
+      left: -20px;
+    }
+  
+    [dir='rtl'] .steps li::before  {
+      right: 0;
+    }
+  }

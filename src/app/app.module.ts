@@ -9,13 +9,20 @@ import { GraphService } from './services/graph.service';
 import { HomeComponent } from './home/home.component';
 import { AuthModule } from './modules/auth/auth.module';
 import { FabricModule } from "./modules/fabric/fabric.module";
+import { ButtonComponent } from './button/button.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
+import { ChoicesComponent } from './choices/choices.component';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConfigComponent,
-
-    HomeComponent
+    HomeComponent,
+    ButtonComponent,
+    CheckboxComponent,
+    ChoicesComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,39 @@
+<h1>
+  Checkbox
+</h1>
+
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">{{sample01}}</code>
+  </div>
+
+  <fab-checkbox value="Check me !" [(isChecked)]="isChecked"></fab-checkbox>
+  <div>
+    <label>is Checked:</label>
+    <span>{{isChecked}}</span>
+  </div>
+  <div>
+    <fab-button (click)="isChecked=!isChecked" classType="ms-Button--primary" value="Check programaticaly"></fab-button>
+  </div>
+</div>
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">{{sample02}}</code>
+  </div>
+
+  <fab-checkbox value="Check me !" (isCheckedChange)="getChecked()"></fab-checkbox>
+
+  <label>get check event:</label>
+  <span>{{isCheckedSample02}}</span>
+
+
+</div>
+<div class="divstep">
+
+  <div class="mark">
+    <code class="prettyprint">{{sample03}}</code>
+  </div>
+
+  <fab-checkbox value="Check me !" isDisabled="true"></fab-checkbox>
+
+</div>

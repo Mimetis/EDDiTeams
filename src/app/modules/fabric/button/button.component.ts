@@ -1,37 +1,55 @@
-import { Component, OnInit, Input, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
 
 
 @Component({
   selector: 'fab-button',
-  encapsulation: ViewEncapsulation.Emulated,
-  templateUrl: './button.component.html'
+  template: `
+            <button #_buttonRef class="ms-Button">
+              <span class="ms-Button-label">{{value}}</span>
+              <span class="ms-Button-description">{{description}}</span> 
+            </button>
+  `
 })
 export class ButtonComponent {
 
-  // Text for the button label is provided by the parent view.
-  @Input() buttonlabel: string;
+  _isDisabled: any;
+  @Input() value: string;
 
-  @Input() class: string;
+  @Input() classType: string;
+
+  @Input() description: string;
+
+  @ViewChild("_buttonRef", { read: ElementRef })
+  private _buttonRef: ElementRef;
 
   constructor(private element: ElementRef) { }
 
-  // After the control has fully rendered, create a Fabric control object for it.
   ngAfterViewInit() {
     let componentElement: HTMLElement = this.element.nativeElement.children[0];
 
-    // removing from the native item, all the ms- class list, since we already have it in the button inner element.
-    let arrayList: DOMTokenList = this.element.nativeElement.classList;
-
-    if (arrayList && arrayList.length > 0) {
-      for (let i = arrayList.length - 1; i >= 0; i--) {
-        if (arrayList[i].toLowerCase().startsWith('ms-'))
-          arrayList.remove(arrayList[i]);
-      }
-
+    if (this.classType && this._buttonRef) {
+      this._buttonRef.nativeElement.classList.add(this.classType);
     }
 
-    // @ts-ignore
-    this.fabricComponent = new fabric.Button(componentElement);
+  }
+
+  @Input()
+  get isDisabled(): boolean {
+    return this._isDisabled;
+  }
+
+  @Output() isDisabledChange = new EventEmitter<boolean>();
+
+  set isDisabled(val) {
+    this._isDisabled = val;
+
+    if (val && !this._buttonRef.nativeElement.classList.contains('is-disabled'))
+      this._buttonRef.nativeElement.classList.add("is-disabled");
+    else if (!val && this._buttonRef.nativeElement.classList.contains('is-disabled'))
+      this._buttonRef.nativeElement.classList.remove("is-disabled");
+
+    // raise the event
+    this.isDisabledChange.emit(val);
   }
 
 }

@@ -1,12 +1,6 @@
 import { Component, Input, Output, EventEmitter, ElementRef, AfterViewInit, SimpleChange } from '@angular/core';
 import { FabricModule } from '../fabric.module';
-
-
-interface DropDownItem {
-  key: string;
-  value: string;
-  isDisabled: boolean;
-}
+import { ChoiceItem } from '../choiceItem';
 
 
 const DROPDOWN_CLASS = "ms-Dropdown";
@@ -31,11 +25,11 @@ export class DropdownComponent {
 
   private _originalOptions: NodeListOf<HTMLOptionElement>;
 
-  @Input() items: Array<DropDownItem>;
+  @Input() items: Array<ChoiceItem>;
   @Input() isDisabled: boolean = false;
 
-  @Input() selectedItem: DropDownItem
-  @Output() selectedItemChange: EventEmitter<DropDownItem> = new EventEmitter<DropDownItem>();
+  @Input() selectedItem: ChoiceItem
+  @Output() selectedItemChange: EventEmitter<ChoiceItem> = new EventEmitter<ChoiceItem>();
 
 
   private _container: HTMLElement;
@@ -72,7 +66,6 @@ export class DropdownComponent {
     if (this.isDisabled) {
       this._container.classList.add('is-disabled');
     }
-
 
     /** Add the new replacement dropdown */
     this._container.appendChild(this._newDropdownLabel);
@@ -151,7 +144,7 @@ export class DropdownComponent {
       }
 
       liItem.innerHTML = ddlItem.value;
-      liItem.id = ddlItem.key;
+      liItem.id = ddlItem.id;
 
       this._newUList.appendChild(liItem);
 
@@ -173,7 +166,7 @@ export class DropdownComponent {
       /** Go ahead and open that dropdown. */
       this._container.classList.add(IS_OPEN_CLASS);
 
-      /** Temporarily bind an event to the document that will close this dropdown when clicking anywhere. */
+      /** Temporarily bind an event to the WHOLE document that will close this dropdown when clicking ANYWHERE. */
       document.addEventListener("click", this._onCloseDropdown);
 
     }
@@ -188,16 +181,23 @@ export class DropdownComponent {
   }
 
   private _onCloseDropdown(evt: Event) {
+
+
+    let liItemSelected = <HTMLLIElement>evt.target;
+    let dropDownItemSelected: ChoiceItem = this.items.find(ddi => ddi.id == liItemSelected.id);
+
+    if (dropDownItemSelected && dropDownItemSelected.isDisabled)
+      return;
+
     this._container.classList.remove(IS_OPEN_CLASS);
     document.removeEventListener("click", this._onCloseDropdown);
   }
 
 
-
   private _onItemSelection(evt: any) {
 
     let liItemSelected = <HTMLLIElement>evt.target;
-    let dropDownItemSelected: DropDownItem = this.items.find(ddi => ddi.key == liItemSelected.id);
+    let dropDownItemSelected: ChoiceItem = this.items.find(ddi => ddi.id == liItemSelected.id);
 
 
     if (!this.isDisabled && !dropDownItemSelected.isDisabled) {
