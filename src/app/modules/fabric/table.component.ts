@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter, ElementRef, AfterViewInit, SimpleChange } from '@angular/core';
-import { FabricModule } from '../fabric.module';
 
 const TABLE_ITEM_IS_SELECTED_CLASS = "is-selected";
 

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ElementRef, SimpleChange } from '@angular/cor
 
 @Component({
   selector: 'fab-label',
-  template: '<label class="ms-Label">{{text}}</label>'
+  template: '<label class="ms-Label"><ng-content></ng-content></label>'
 })
 export class LabelComponent {
 

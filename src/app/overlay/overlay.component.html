@@ -1,0 +1,24 @@
+<h1>
+  Overlay
+</h1>
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">{{sample01}}</code>
+  </div>
+
+  <fab-overlay #overlay (click)='overlay.hide()'></fab-overlay>
+
+  <fab-button (click)='overlay.show()'>Show Overlay</fab-button>
+
+</div>
+
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">{{sample02}}</code>
+  </div>
+
+  <fab-overlay #overlay2 dark (click)='overlay2.hide()'></fab-overlay>
+
+  <fab-button (click)='overlay2.show()'>Show Overlay</fab-button>
+
+</div>

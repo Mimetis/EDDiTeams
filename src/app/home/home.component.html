@@ -14,12 +14,10 @@
   <img [src]="photoUrl" width="40" height="40">
 </div>
 
-<fab-choicefieldgroup [items]="selectedItems" value="Make a CHOICE"></fab-choicefieldgroup>
-
 
 <fab-button (click)="setChecked()" value="change checked status"></fab-button>
 
-<fab-radiobutton [value]="checkName" [isDisabled]="isCheckedDisabled"></fab-radiobutton>
+<fab-choice [value]="checkName" [isDisabled]="isCheckedDisabled"></fab-choice>
 
 <fab-checkbox [value]="checkName" [isDisabled]="isCheckedDisabled" [(isChecked)]="isChecked" (isCheckedChange)="getChecked()"></fab-checkbox>
 

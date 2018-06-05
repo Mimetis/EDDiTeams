@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent } from './button/button.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
-import { LabelComponent } from './label/label.component';
-import { LinkComponent } from './link/link.component';
-import { TableComponent } from './table/table.component';
+import { ButtonComponent } from './button.component';
+import { DropdownComponent } from './dropdown.component';
+import { LabelComponent } from './label.component';
+import { LinkComponent } from './link.component';
+import { TableComponent } from './table.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
-import { RadiobuttonComponent } from './radiobutton/radiobutton.component';
-import { ChoiceFieldGroupComponent } from './choicefieldgroup/choicefieldgroup.component';
+import { ChoicesComponent, ChoiceComponent } from './choices.component';
+import { TextFieldComponent } from "./textfield.component";
+import { DialogComponent, DialogActionsComponent, DialogContentComponent, DialogTitleComponent } from './dialog.component';
+import { OverlayComponent } from './overlay.component';
 
 @NgModule({
   imports: [
@@ -15,9 +17,14 @@ import { ChoiceFieldGroupComponent } from './choicefieldgroup/choicefieldgroup.c
   ],
   declarations: [
     ButtonComponent, DropdownComponent, LabelComponent, LinkComponent,
-    TableComponent, CheckboxComponent, RadiobuttonComponent, ChoiceFieldGroupComponent],
+    TableComponent, CheckboxComponent, ChoicesComponent, ChoiceComponent, ChoicesComponent,
+    TextFieldComponent, DialogComponent, DialogActionsComponent, DialogContentComponent, DialogTitleComponent,
+    OverlayComponent],
   exports: [
     ButtonComponent, DropdownComponent, LabelComponent, LinkComponent,
-    TableComponent, CheckboxComponent, RadiobuttonComponent, ChoiceFieldGroupComponent]
+    TableComponent, CheckboxComponent, ChoicesComponent, ChoiceComponent,
+    TextFieldComponent, DialogComponent, DialogActionsComponent, DialogContentComponent, DialogTitleComponent,
+    OverlayComponent],
+
 })
 export class FabricModule { }

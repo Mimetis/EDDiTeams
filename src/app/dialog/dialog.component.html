@@ -1,0 +1,48 @@
+<h1>
+  TextField
+</h1>
+
+
+<!-- <div class="divstep">
+  <div class="mark">
+    <pre><code class="javascript">{{'var j = 1;
+if (j > 1){
+  let u = "dddd";
+}'}}</code></pre>
+  </div> </div> -->
+
+<app-hl #apphl1>
+</app-hl>
+
+<br />
+
+<app-hl #apphl2>
+</app-hl>
+
+<app-hl value="
+<fab-dialog #dialog01 dark isModal>
+  <fab-dialog-title>All emails together</fab-dialog-title>
+  <fab-dialog-content description='Are you sure you want to discard these changes?.'>
+    <fab-checkbox value='check me'></fab-checkbox>
+    <fab-checkbox value='check me as well'></fab-checkbox>
+  </fab-dialog-content>
+  <fab-dialog-actions>
+    <fab-button (click)='dialog01.close()' buttonType='primary'>Save</fab-button>
+    <fab-button (click)='dialog01.close()' style='margin-left: 5px;'>Cancel</fab-button>
+  </fab-dialog-actions>
+</fab-dialog>"></app-hl>
+
+
+<fab-dialog #dialog01 dark isModal>
+  <fab-dialog-title>All emails together</fab-dialog-title>
+  <fab-dialog-content description='Are you sure you want to discard these changes?.'>
+    <fab-checkbox value="check me"></fab-checkbox>
+    <fab-checkbox value="check me as well"></fab-checkbox>
+  </fab-dialog-content>
+  <fab-dialog-actions>
+    <fab-button (click)='dialog01.close()' buttonType='primary'>Save</fab-button>
+    <fab-button (click)='dialog01.close()' style='margin-left: 5px;'>Cancel</fab-button>
+  </fab-dialog-actions>
+</fab-dialog>
+
+<fab-button (click)='dialog01.open()'>Open dialog</fab-button>

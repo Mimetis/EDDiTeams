@@ -8,8 +8,11 @@ import { AuthendComponent } from './modules/auth/authend/authend.component';
 import { AuthlogoutComponent } from './modules/auth/authlogout/authlogout.component';
 import { ButtonComponent } from './button/button.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
-import { ChoicesComponent } from './choices/choices.component';
+import { RadioComponent } from './choices/radio.component';
 import { TableComponent } from './table/table.component';
+import { TextfieldComponent } from './textfield/textfield.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { OverlayComponent } from './overlay/overlay.component';
 
 var routes: Routes = [
   { path: "", component: HomeComponent },
@@ -20,8 +23,11 @@ var routes: Routes = [
   { path: "authlogout", component: AuthlogoutComponent },
   { path: "button", component: ButtonComponent },
   { path: "checkbox", component: CheckboxComponent },
-  { path: "choices", component: ChoicesComponent },
+  { path: "choices", component: RadioComponent },
+  { path: "textfield", component: TextfieldComponent },
   { path: "table", component: TableComponent },
+  { path: "overlay", component: OverlayComponent },
+  { path: "dialog", component: DialogComponent },
 
 
 

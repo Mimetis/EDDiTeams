@@ -1,45 +1,63 @@
 <h1>
   Button
 </h1>
-<div class="divstep">
-  <div class="mark">
-    <code class="prettyprint">{{sample01}}</code>
-  </div>
-
-  <fab-button value="Click me !"></fab-button>
-</div>
 
 <div class="divstep">
-  <div class="mark">
-    <code class="prettyprint">{{sample02}}</code>
-  </div>
-  <fab-button classType="ms-Button--primary" value="Click me !"></fab-button>
+
+
+  <p>
+    Buttons are best used to enable a user to commit a change or complete steps in a task. They are typically found inside forms,
+    dialogs, panels or pages. An example of their usage is confirming the deletion of a file in a confirmation dialog.
+  </p>
+  <p> When considering their place in a layout, contemplate the order in which a user will flow through the UI. As an example,
+    in a form, the individual will need to read and interact with the form fields before submiting the form. Therefore, as
+    a general rule, the button should be placed at the bottom of the UI container (a dialog, panel, or page) which holds
+    the related UI elements.
+  </p>
+  <p>
+    While buttons can technically be used to navigate a user to another part of the experience, this is not recommended - unless
+    that navigation is part of an action or their flow.
+  </p>
 </div>
 
 <div class="divstep">
-  <div class="mark">
-    <code class="prettyprint">{{sample03}}</code>
-  </div>
-  <fab-button classType="ms-Button--hero" value="Click me !"></fab-button>
+  <app-hl title="Normal button" value="<fab-button>Click me !</fab-button>"></app-hl>
+  <fab-button>Click me !</fab-button>
 </div>
+
 <div class="divstep">
-  <div class="mark">
-    <code class="prettyprint">{{sample04}}</code>
-  </div>
-  <fab-button classType="ms-Button--compound" value="Click me !" description="get more informations about this"></fab-button>
+  <app-hl title="Primary button" value="<fab-button buttonType='primary'>Click me !</fab-button>"></app-hl>
+  <fab-button buttonType="primary">Click me !</fab-button>
 </div>
+
 <div class="divstep">
-  <div class="mark">
-    <code class="prettyprint">{{sample05}}</code>
-  </div>
-  <fab-button (click)="clicked()" classType="ms-Button--primary" class="button-margin" value="Raise click event"></fab-button>
+  <app-hl title="Primary button smaller" value="<fab-button buttonType='primary' small>Click me !</fab-button>"></app-hl>
+  <fab-button buttonType="primary" small>Click me !</fab-button>
+</div>
+
+
+<div class="divstep">
+  <app-hl title="Hero button" value="<fab-button buttonType='hero'>Click me !</fab-button>"></app-hl>
+  <fab-button buttonType="hero">Click me !</fab-button>
+</div>
+
+<div class="divstep">
+  <app-hl title="Compound button" value="<fab-button buttonType='compound' description='get more informations about this'>Click me !</fab-button>"></app-hl>
+  <fab-button buttonType='compound' description='get more informations about this'>Click me !</fab-button>
+</div>
+
+<div class="divstep">
+  <app-hl title="Primary button raising event" value="<fab-button (click)='clicked($event)' buttonType='primary'>Raise click event</fab-button>
+clicked(event: any) {
+  this.sample06label = 'BUTTON CLICKED';
+}"></app-hl>
+
+  <fab-button (click)='clicked($event)' buttonType='primary'>Raise click event</fab-button>
   <div>
-    <label>{{sample05label}}</label>
+    <label>{{sample06label}}</label>
   </div>
 </div>
 <div class="divstep">
-  <div class="mark">
-    <code class="prettyprint">{{sample06}}</code>
-  </div>
-  <fab-button classType="ms-Button--primary" isDisabled="true" value="Click me !"></fab-button>
+  <app-hl title="Disabled button" value="<fab-button (click)='alert(`if this message appears, disabled does not work as expected :)`);' isDisabled='true'>Click me !</fab-button>"></app-hl>
+  <fab-button (click)="alert('if this message appears, disabled does not work as expected :)');" isDisabled="true">Click me !</fab-button>
 </div>

@@ -15,6 +15,8 @@ export class ConfigComponent implements OnInit {
     // get context
     microsoftTeams.getContext((context: microsoftTeams.Context) => {
       console.log(context);
+      // validate your form
+
       this.setValidityState(true);
     });
 

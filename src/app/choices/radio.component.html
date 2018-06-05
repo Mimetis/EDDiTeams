@@ -18,5 +18,15 @@
   <div class="mark">
     <code class="prettyprint">{{sample01}}</code>
   </div>
-  <fab-choicefieldgroup [items]="items" value="Make a CHOICE"></fab-choicefieldgroup>
+</div>
+<div class="divstep">
+  <div class="mark">
+    <fab-choices id="mychoicescomp" (change)="selectedItemChange($event)">
+      <fab-choice id="id1" name="a">Hello world</fab-choice>
+      <fab-choice id="id2" name="a">Hello world</fab-choice>
+    </fab-choices>
+    <fab-choices id="mychoicescomp2">
+      <fab-choice id="id3" name="a">Hello world</fab-choice>
+    </fab-choices>
+  </div>
 </div>

@@ -11,8 +11,12 @@ import { AuthModule } from './modules/auth/auth.module';
 import { FabricModule } from "./modules/fabric/fabric.module";
 import { ButtonComponent } from './button/button.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
-import { ChoicesComponent } from './choices/choices.component';
+import { RadioComponent } from './choices/radio.component';
 import { TableComponent } from './table/table.component';
+import { TextfieldComponent } from './textfield/textfield.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { OverlayComponent } from './overlay/overlay.component';
+import { HighlightComponent } from './highlight/highlight.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +25,12 @@ import { TableComponent } from './table/table.component';
     HomeComponent,
     ButtonComponent,
     CheckboxComponent,
-    ChoicesComponent,
-    TableComponent
+    RadioComponent,
+    TableComponent,
+    TextfieldComponent,
+    DialogComponent,
+    OverlayComponent,
+    HighlightComponent
   ],
   imports: [
     BrowserModule,

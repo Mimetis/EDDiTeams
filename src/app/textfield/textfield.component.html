@@ -1,0 +1,59 @@
+<h1>
+  TextField
+</h1>
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">{{sample01}}</code>
+  </div>
+
+  <fab-textfield label="Name"></fab-textfield>
+
+</div>
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">{{sample02}}</code>
+  </div>
+
+  <fab-textfield label="Name" [isRequired]="true"></fab-textfield>
+
+</div>
+
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">{{sample03}}</code>
+  </div>
+  <fab-textfield [isMultiLine]="true" label="Name"></fab-textfield>
+</div>
+
+
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">{{sample04}}</code>
+  </div>
+  <fab-textfield [isUnderlined]="true" [isRequired]="true" label="Name"></fab-textfield>
+</div>
+
+
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">{{sample05}}</code>
+  </div>
+  <fab-textfield [hasPlaceholder]="true" label="Name"></fab-textfield>
+</div>
+
+
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">{{sample06}}</code>
+  </div>
+  <fab-textfield [isUnderlined]="true" [hasPlaceholder]="true" [isRequired]="true" label="Name"></fab-textfield>
+</div>
+
+
+<div class="divstep">
+  <div class="mark">
+    <code class="prettyprint">{{sample07}}</code>
+  </div>
+  <fab-textfield [isUnderlined]="true" [hasPlaceholder]="true" [isRequired]="true" label="Name" (valueChanged)="valueChanged($event)"></fab-textfield>
+  <fab-label>{{textFieldValue}}</fab-label>
+</div>

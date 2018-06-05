@@ -3,12 +3,15 @@ body {
     font-size: .875rem;
   }
   
+  pre{
+    margin: 0px;
+  }
+
   .mark{
     border:1px solid #005cb9;
     background-color:#f1f5f9;
     overflow:auto;
-    margin-top:1.7em;
-    margin-bottom:1.7em;
+    margin:0px;
     padding:1em!important;
     overflow-y:hidden
   }
@@ -133,8 +136,7 @@ ul {
 .divstep{
     max-width: 90em;
     padding-left: 56px;
-    border-bottom: 1px solid #c8c8c8;
-    margin-bottom: 48px;
+    margin-bottom: 10px;
     padding-bottom: 20px;
 
 }
@@ -205,3 +207,258 @@ ul {
       right: 0;
     }
   }
+
+  .ExampleCard {
+    margin-bottom: 20px;
+  }
+  
+  .ExampleCard-header {
+    border-bottom: 1px solid #a6a6a6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+  }
+  
+  .ExampleCard-title {
+    margin-bottom: 0px;
+    display: inline-block;
+  }
+  
+  .ExampleCard-toggleButtons {
+    display: block;
+    float: right;
+  }
+  
+
+  .ExampleCard-codeButton {
+    background: none;
+    border: 1px solid #a6a6a6;
+    border-bottom: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    line-height: 1;
+    padding: 4px 12px;
+    min-width: 100px;
+    margin-right: 0;
+    transition: border 0.367s cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+  
+  
+  .ExampleCard-codeButton .ms-Button-icon {
+    display: inline-block;
+    position: relative;
+    top: 3px;
+  }
+  
+  .ExampleCard-codeButton .ms-Button-icon .ms-Icon {
+    font-size: 17px;
+    padding: 0;
+    margin-left: 8px;
+  }
+  
+  .ExampleCard-codeButton .ms-Button-label {
+    color: #212121;
+    display: inline-block;
+    padding-bottom: 6px;
+  }
+  
+  .ExampleCard-codeButton .hideSpan {
+    display: none;
+  }
+  
+  .ExampleCard-toggleButtons .ExampleCard-codeButton.is-active,
+  .ExampleCard-toggleButtons .ExampleCard-codeButton:hover {
+    background-color: #212121;
+    border-color: #212121;
+    color:#fff;
+  }
+  
+  .ExampleCard-toggleButtons .ExampleCard-codeButton.is-active .ms-Button-icon,
+  .ExampleCard-toggleButtons .ExampleCard-codeButton.is-active .ms-Button-label,
+  .ExampleCard-toggleButtons .ExampleCard-codeButton:hover .ms-Button-icon,
+  .ExampleCard-toggleButtons .ExampleCard-codeButton:hover .ms-Button-label {
+    color: #ffffff;
+  }
+  
+  .ExampleCard-example {
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 0;
+  }
+  
+  [dir='ltr'] .ExampleCard-example.is-right-aligned {
+    text-align: right;
+  }
+  
+  [dir='rtl'] .ExampleCard-example.is-right-aligned {
+    text-align: left;
+  }
+
+  .ExampleCard-code {
+    background-color: #212121;
+    overflow: hidden;
+  }
+  
+  .ExampleCard-code pre {
+    margin: 0;
+    max-height: 0;
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.367s cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+  
+  .ExampleCard-code code {
+    display: block;
+    margin: 12px;
+  }
+  
+.ExampleCard.is-codeVisible .ExampleCard-header {
+  border-color: #212121;
+}
+
+.ExampleCard.is-codeVisible .ExampleCard-code pre {
+  max-height: 480px;
+  border: 1px solid #212121;
+  border-top: 0;
+  overflow: auto;
+}
+
+.ExampleCard.is-codeVisible .ExampleCard-codeButton {
+  background-color: #212121;
+}
+
+.ExampleCard.is-codeVisible .ExampleCard-codeButton .ms-Button-icon,
+.ExampleCard.is-codeVisible .ExampleCard-codeButton .ms-Button-label {
+  color: #ffffff;
+}
+
+.ExampleCard.is-codeVisible .ExampleCard-codeButton .hideSpan {
+  display: inline;
+}
+
+.ExampleCard.is-codeVisible .ExampleCard-codeButton .showSpan {
+  display: none;
+}
+
+.ExampleCard.is-codeVisible .ExampleCard-code {
+  display: block;
+  margin-bottom: 20px;
+}
+
+
+
+  /*
+ * Visual Studio 2015 dark style
+ * Author: Nicolas LLOBERA <nllobera@gmail.com>
+ */
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #212121;
+  color: #DCDCDC;
+}
+
+.hljs-keyword,
+.hljs-literal,
+.hljs-symbol,
+.hljs-name {
+  color: #569CD6;
+}
+.hljs-link {
+  color: #569CD6;
+  text-decoration: underline;
+}
+
+.hljs-built_in,
+.hljs-type {
+  color: #4EC9B0;
+}
+
+.hljs-number,
+.hljs-class {
+  color: #B8D7A3;
+}
+
+.hljs-string,
+.hljs-meta-string {
+  color: #D69D85;
+}
+
+.hljs-regexp,
+.hljs-template-tag {
+  color: #9A5334;
+}
+
+.hljs-subst,
+.hljs-function,
+.hljs-title,
+.hljs-params,
+.hljs-formula {
+  color: #DCDCDC;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #57A64A;
+  font-style: italic;
+}
+
+.hljs-doctag {
+  color: #608B4E;
+}
+
+.hljs-meta,
+.hljs-meta-keyword,
+.hljs-tag {
+  color: #9B9B9B;
+}
+
+.hljs-variable,
+.hljs-template-variable {
+  color: #BD63C5;
+}
+
+.hljs-attr,
+.hljs-attribute,
+.hljs-builtin-name {
+  color: #9CDCFE;
+}
+
+.hljs-section {
+  color: gold;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+/*.hljs-code {
+  font-family:'Monospace';
+}*/
+
+.hljs-bullet,
+.hljs-selector-tag,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #D7BA7D;
+}
+
+.hljs-addition {
+  background-color: #144212;
+  display: inline-block;
+  width: 100%;
+}
+
+.hljs-deletion {
+  background-color: #600;
+  display: inline-block;
+  width: 100%;
+}

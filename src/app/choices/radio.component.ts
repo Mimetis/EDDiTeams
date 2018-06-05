@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-choices',
-  templateUrl: './choices.component.html'
+  templateUrl: './radio.component.html'
 
 })
-export class ChoicesComponent {
+export class RadioComponent {
 
   constructor() { }
 
@@ -23,6 +23,11 @@ export class ChoicesComponent {
 
   datas = ``
 
-  sample01 = `<fab-choicefieldgroup [items]="items" value="Make a CHOICE"></fab-choicefieldgroup>`;
+  sample01 = `<fab-choices [items]="items" value="toto"></fab-choices>`;
+
+
+  selectedItemChange($event) {
+    // console.log($event);
+  }
 
 }

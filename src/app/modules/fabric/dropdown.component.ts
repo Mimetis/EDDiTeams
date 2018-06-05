@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, ElementRef, AfterViewInit, SimpleChange } from '@angular/core';
-import { FabricModule } from '../fabric.module';
-import { ChoiceItem } from '../choiceItem';
+import { ChoiceItem } from './choiceItem';
 
 
 const DROPDOWN_CLASS = "ms-Dropdown";
